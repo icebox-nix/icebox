@@ -2,7 +2,7 @@
 	<a href="https://github.com/LEXUGE/icebox"><img src="./logo.svg" alt="icebox logo" width="256" height="256"/></a><br>
 	icebox
 </h1>
-A simple and generic NixOS configuration framework (*currently only on unstable channel*)
+A simple and generic NixOS configuration framework ( **currently only on unstable channel** )
 
 ## What it is
 - A plugin toolkit
@@ -19,7 +19,7 @@ let
 in {
   imports = [
     "${icebox}"
-	# Other imports
+    # Other imports
   ];
   # Other settings
 }
