@@ -1,6 +1,7 @@
-![icebox logo](./logo.svg)
-<central># icebox<central>
+<center><a href="https://github.com/LEXUGE/icebox"><img src="./logo.svg" alt="icebox logo" width="256" height="256"/></a></center>
+<h1><central>icebox<central></h1>
 A simple and generic NixOS configuration framework (*currently only on unstable channel*)
+<hr>
 ## What it is
 - A plugin toolkit
 - A system configuration setup framework
