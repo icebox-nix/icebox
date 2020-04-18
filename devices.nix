@@ -7,7 +7,8 @@ in {
   options.icebox = {
     # FIXME: There must be option inside static in order to set `icebox.static....` later.
     static.devices.reserved = mkOption {
-      type = types.unspecified;
+      type =
+        types.unspecified; # Using unspecified simply because this should never be filled in!
       visible = false;
       readOnly = true;
       default = { };
@@ -22,7 +23,8 @@ in {
       };
 
       configs = mkOption {
-        type = with types; attrsOf unspecified;
+        type = with types;
+          attrsOf unspecified; # attrset like { pluginsA = { its configs}; }
         description = "Configuration for plugins";
         default = { };
       };

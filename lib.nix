@@ -11,6 +11,13 @@ in {
         visible = false;
         default = { };
       };
+      configs = mkOption {
+        type = types.submoduleWith {
+          modules = cfg.modules;
+          shorthandOnlyDefinesConfig = true;
+        };
+        visible = false;
+      };
     };
 
     lib = {
@@ -19,17 +26,24 @@ in {
         default = { };
         description =
           "A set of plugins for supplementary functions and modules";
+        example = {
+          filterPluginConfigs = cfg':
+            (attrsets.mapAttrs (n: v: mkIf (any (a: a == n) cfg'.plugins) v)
+              cfg'.configs);
+        };
       };
       modules = mkOption {
         type = with types; listOf unspecified;
         default = [ ];
+        description = "A list of modules to add.";
+        example = [ (import ./path/to/foo.nix { lib = lib; }) ];
       };
       configs = mkOption {
-        type = types.submoduleWith {
-          modules = cfg.modules;
-          shorthandOnlyDefinesConfig = true;
-        };
+        # If we use the same `submoduleWith` type like it uses in static.lib.configs, some options would be counted as setted twice, which is not what we want.
+        type = types.unspecified;
         default = { };
+        description =
+          "Configs for options in modules defined in <option>config.icebox.lib.modules</option>";
       };
     };
   };
@@ -47,5 +61,6 @@ in {
           cfg');
       mkUserConfigs' = g: cfg': (mkUserConfigs (n: c: n) g cfg');
     };
+    icebox.static.lib.configs = cfg.configs;
   };
 }

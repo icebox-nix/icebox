@@ -11,11 +11,13 @@ let
     options = {
       # We don't need `default` here because attrByPath would automatically return { } if path is not viable.
       regular = mkOption {
-        type = types.unspecified;
+        type =
+          types.unspecified; # Ultimately would be passed into `users.users` and get checked.
         description = "Regular system level configurations for users.";
       };
       configs = mkOption {
-        type = with types; attrsOf (unspecified);
+        type = with types;
+          attrsOf (unspecified); # attrset like { pluginsA = { its configs}; }
         description = "Configuration for plugin options.";
       };
     };
@@ -24,7 +26,8 @@ in {
   options.icebox = {
     # FIXME: There must be option inside static in order to set `icebox.static....` later.
     static.users.reserved = mkOption {
-      type = types.unspecified;
+      type =
+        types.unspecified; # Using unspecified simply because this should never be filled in!
       visible = false;
       readOnly = true;
       default = { };
