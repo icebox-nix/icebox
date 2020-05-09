@@ -59,7 +59,12 @@ in {
         (attrsets.mapAttrs'
           (n: c: attrsets.nameValuePair (f n c) (mkIf (c.enable) (g n c)))
           cfg');
+      # A shorthanded version of `mkUserConfigs` with LHS as "${name}".
       mkUserConfigs' = g: cfg': (mkUserConfigs (n: c: n) g cfg');
+      # If there is one or more of the users enable(s) the plugin, it would return true, else false.
+      anyEnabled = cfg':
+        (s: if (s != { }) then true else false)
+        (filterAttrs (n: c: c.enable) cfg');
     };
     icebox.static.lib.configs = cfg.configs;
   };
