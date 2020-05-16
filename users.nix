@@ -4,6 +4,8 @@ with lib;
 
 let
   cfg = config.icebox.users;
+  # We should not let it throw error if path is not viable since users could just use the default settings.
+  # If path doesn't exist, default value `{ }` would be returned.
   convertOptions = path:
     (attrsets.mapAttrs (n: v: (lib.attrsets.attrByPath path { } v)) cfg.users);
 
@@ -44,7 +46,7 @@ in {
         type = with types; attrsOf (submodule usersOpts);
         description =
           "Module for settings of either options in user profiles or options of user management in system-level.";
-        default = { };
+        default = { }; # Else error would be thrown in `convertOptions`.
       };
       groups = mkOption {
         type = types.unspecified;
@@ -60,8 +62,7 @@ in {
     users.users = convertOptions [ "regular" ];
 
     # Pass configuration to plugins
-    icebox.static.users = builtins.listToAttrs
-      (map (n: attrsets.nameValuePair (n) (convertOptions [ "configs" n ]))
-        cfg.plugins);
+    icebox.static.users = config.icebox.static.lib.functions.genPluginConfigs
+      (n: { configs = (convertOptions [ "configs" n ]); }) cfg;
   };
 }

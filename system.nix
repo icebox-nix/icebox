@@ -39,6 +39,6 @@ in {
   config = {
     system.stateVersion = cfg.stateVersion;
     icebox.static.system =
-      config.icebox.static.lib.functions.filterPluginConfigs cfg;
+      config.icebox.static.lib.functions.genPluginConfigs' cfg;
   };
 }

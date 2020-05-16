@@ -33,6 +33,6 @@ in {
 
   config = {
     icebox.static.devices =
-      config.icebox.static.lib.functions.filterPluginConfigs cfg;
+      config.icebox.static.lib.functions.genPluginConfigs' cfg;
   };
 }
