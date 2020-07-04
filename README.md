@@ -79,6 +79,6 @@ Plugins are like packages and **should go under scrutiny**. icebox ensures that 
 it does nothing under `enable = false`, then this plugin would only take effect if you list it explicitly in the respective `plugins` option.
 
 # Related stuff
-- [netkit.nix](https://github.com/icebox-nix/netkit.nix). Verstile icebox plugins for advanced networking scenarios in NixOS. (I use it heavily and it works out-of-box!)
+- [netkit.nix](https://github.com/icebox-nix/netkit.nix). Verstile icebox plugins for advanced networking scenarios in NixOS. (I use it heavily, and it works out-of-box!)
 - [std](https://github.com/icebox-nix/std). Standard library for icebox.
 - [nixos](https://github.com/LEXUGE/nixos). My personal nixos configuration consisting of icebox plugins only.
